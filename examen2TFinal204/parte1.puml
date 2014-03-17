@@ -1,0 +1,44 @@
+@startuml
+
+title Parte 1 
+
+class index << (P, orchild) php>>{
+Pagina inicial
+...
+Enlace a Listado
+Enlace a Acceso
+}
+
+class listadocat << (P, orchild) php>>{
+Listado de Categorias
+...
+bbdd: include
+}
+
+class faltacat << (P, orchild) php>>{
+Formulario para alta de una categoria
+Sin validar
+...
+}
+
+class galtacat << (P, orchild) php>>{
+Proceso de grabar (insert) una nueva categoria
+Sin validar
+...
+bbdd: include
+}
+
+class error << (P, orchild) php>>{
+Mostrar Error
+...
+}
+
+index --> listadocat: link {listado}
+listadocat --> index: link {inicio}
+listadocat --> faltacat: link {Alta}
+faltacat --> galtacat: submit
+faltacat --> listadocat: link {listado}
+galtacat --> listadocat: redirect {si OK}
+galtacat--> error: redirect {si Error Grabar}
+error --> index: link
+@enduml

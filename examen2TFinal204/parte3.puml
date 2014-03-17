@@ -1,0 +1,43 @@
+@startuml
+
+title Parte 3
+
+class index << (P, orchild) php>>{
+Pagina inicial
+...
+Enlace a Listado
+Enlace a Acceso
+}
+
+class listadocat << (P, orchild) php>>{
+Listado de Categorias
+...
+bbdd: include
+}
+
+class cborrar << (P, orchild) php>>{
+Confirmacion borrado
+...
+bbdd: include
+}
+
+class borrar << (P, orchild) php>>{
+borrar (DELETE) categoria
+...
+bbdd: include
+}
+
+class error << (P, orchild) php>>{
+Mostrar Error
+...
+}
+
+index --> listadocat: link {listado}
+listadocat --> cborrar: link {id producto}
+listadocat --> index: link {inicio}
+cborrar --> listadocat: link {volver a listado}
+cborrar --> borrar: link {confirmar borrado}
+borrar --> listadocat: redirect {si OK}
+borrar --> error: redirect {si Error Grabar}
+error --> index: link
+@enduml

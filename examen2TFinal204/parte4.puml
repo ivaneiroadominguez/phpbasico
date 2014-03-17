@@ -1,0 +1,57 @@
+@startuml
+
+title Parte 4
+
+class index << (P, orchild) php>>{
+Pagina inicial
+...
+Enlace a Listado
+Enlace a Acceso
+}
+
+class acceso << (P, orchild) php>>{
+Formulario Acceso
+...
+bbdd: include
+}
+
+class login << (P, orchild) php>>{
+Proceso de verificacion de login
+...
+bbdd: include
+...
+}
+
+class logout << (P, orchild) php>>{
+proceso desconectar cliente y volver a index
+...
+bbdd: include
+}
+
+class error << (P, orchild) php>>{
+Mostrar Error
+...
+Enlace a Index
+}
+
+class listadopro << (P, orchild) php>>{
+Listado de productos
+...
+bbdd: include
+--
++ Acceso restringido a cliente logeado
++ Mostrar cliente
++ Enlace a Logout
+}
+
+
+index --> acceso: link {acceso}
+acceso --> login: submit
+acceso --> index: link {inicio}
+login --> listadopro: redirect {si login OK}
+login --> error: redirect {si login Error}
+listadopro --> index: link
+listadopro --> logout: link {logout}
+logout --> index: redirect
+error --> index: link
+@enduml

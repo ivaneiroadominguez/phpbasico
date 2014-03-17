@@ -1,0 +1,45 @@
+@startuml
+
+title Parte 2
+
+class index << (P, orchild) php>>{
+Pagina inicial
+...
+Enlace a Listado
+Enlace a Acceso
+}
+
+class acceso << (P, orchild) php>>{
+Formulario Acceso
+...
+bbdd: include
+}
+
+class faltacli << (P, orchild) php>>{
+Formulario para alta/registro de un cliente
+...
+bbdd: include
+func: include
+}
+
+class galtacli << (P, orchild) php>>{
+Proceso de grabar (insert) un cliente nuevo
+con validación
+...
+bbdd: include
+func: include
+}
+
+class error << (P, orchild) php>>{
+Mostrar Error
+...
+}
+
+index --> acceso: link {listado}
+acceso --> faltacli: link {Registro}
+faltacli --> galtacli: submit
+galtacli --> acceso: redirect {si OK}
+galtacli --> faltacli: redirect {Si error Validar}
+galtacli--> error: redirect {si Error Grabar}
+error --> index: link
+@enduml
